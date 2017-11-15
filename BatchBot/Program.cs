@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
+using BatchBot.BotModules;
 
 namespace BatchBot
 {
@@ -61,10 +62,11 @@ namespace BatchBot
         /// <param name="arg">The Bots Token, is added as a command line argument for security reasons</param>
         private async Task MainAsync(string arg)
         {
+            await _client.LoginAsync(TokenType.Bot, arg, true);
 
+            await _client.StartAsync();
 
-
-
+            await Task.Delay(-1);
         }
         
         /// <summary>
@@ -86,7 +88,7 @@ namespace BatchBot
 
             _services = _map.BuildServiceProvider(true);
 
-            // insert added modules here
+            await _commands.AddModuleAsync<BatchAdmin>();
 
             _client.MessageReceived += HandleCommandAsync;
         }
