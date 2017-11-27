@@ -20,13 +20,13 @@ namespace BatchBot.BotModules
         [Summary("Kicks all members of a given role")]
         [RequireUserPermission(GuildPermission.Administrator)]
         [RequireBotPermission(GuildPermission.KickMembers)]
-        public async Task Kick([Summary("The Role to loop through to kick all members with said Role")] IRole role, [Summary("The reason that is put in the audit log")]string reason)
+        public async Task Role_Kick([Summary("The Role to loop through to kick all members with said Role")] IRole role, [Summary("The reason that is put in the audit log")]string reason)
         {
             // bail the fuck out if the role specified isnt for the server the command is being called on
             //if (role.Guild != Context.Guild) return;
             IGuildUser[] userArray;
             // make sure we have all the members of the server to search through
-            await Context.Guild.DownloadUsersAsync();
+            //await Context.Guild.DownloadUsersAsync();
             userArray = Context.Guild.Users as IGuildUser[];
             for (int user = 0; user < Context.Guild.MemberCount; user++)
             {
